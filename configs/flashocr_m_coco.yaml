@@ -1,0 +1,35 @@
+# FlashOCR-m | Default config
+# Params: ~1.5M | FP16: ~3 MB
+# Usage: flashocr train --config configs/flashocr_m_coco.yaml
+
+model:
+  name: FlashOCR
+  backbone: ShuffleNetV2
+  backbone_size: "1.0x"
+  input_size: [32, 128]
+  charset: "0123456789abcdefghijklmnopqrstuvwxyz"
+  hidden_size: 256
+  num_layers: 2
+  decoder_type: ctc
+
+data:
+  train_images: data/train
+  train_labels: data/train/labels.tsv
+  val_images: data/val
+  val_labels: data/val/labels.tsv
+  num_workers: 4
+
+train:
+  epochs: 100
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.05
+  warmup_epochs: 5
+  val_interval: 1
+  save_dir: workspace/flashocr_m
+
+augment:
+  rotation: 5
+  blur_prob: 0.1
+  noise_prob: 0.1
+  brightness: 0.2

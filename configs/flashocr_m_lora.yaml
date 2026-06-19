@@ -1,0 +1,45 @@
+# FlashOCR-m | LoRA Fine-tuning
+# Fine-tune with pretrained weights using LoRA
+# Only ~5% of parameters trained, much faster convergence
+# Usage: flashocr train --config configs/flashocr_m_lora.yaml
+
+model:
+  name: FlashOCR
+  backbone: ShuffleNetV2
+  backbone_size: "1.0x"
+  input_size: [32, 128]
+  charset: "0123456789abcdefghijklmnopqrstuvwxyz"
+  hidden_size: 256
+  num_layers: 2
+  decoder_type: ctc
+
+data:
+  train_images: data/custom/train
+  train_labels: data/custom/train/labels.tsv
+  val_images: data/custom/val
+  val_labels: data/custom/val/labels.tsv
+  num_workers: 4
+
+train:
+  epochs: 50
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.05
+  warmup_epochs: 3
+  val_interval: 5
+  save_dir: workspace/flashocr_lora
+  pretrained: true
+
+  # LoRA settings
+  use_lora: true
+  lora_rank: 8
+  lora_alpha: 16.0
+  lora_dropout: 0.05
+  lora_target_modules: ["backbone", "encoder"]
+  lora_variant: dora  # standard, dora, lora_plus, adalora, ortho, lora_fa
+
+augment:
+  rotation: 5
+  blur_prob: 0.1
+  noise_prob: 0.1
+  brightness: 0.2

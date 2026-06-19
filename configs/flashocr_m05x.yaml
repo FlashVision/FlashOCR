@@ -1,0 +1,36 @@
+# FlashOCR-m-0.5x | Ultra-lightweight for edge
+# Params: ~0.6M | FP16: ~1.5 MB
+# Usage: flashocr train --config configs/flashocr_m05x.yaml
+
+model:
+  name: FlashOCR
+  backbone: ShuffleNetV2
+  backbone_size: "0.5x"
+  input_size: [32, 128]
+  charset: "0123456789abcdefghijklmnopqrstuvwxyz"
+  hidden_size: 128
+  num_layers: 2
+  decoder_type: ctc
+
+data:
+  train_images: data/train
+  train_labels: data/train/labels.tsv
+  val_images: data/val
+  val_labels: data/val/labels.tsv
+  num_workers: 8
+
+train:
+  epochs: 200
+  batch_size: 128
+  learning_rate: 0.001
+  weight_decay: 0.05
+  warmup_epochs: 5
+  val_interval: 10
+  save_dir: workspace/flashocr_m05x
+
+augment:
+  rotation: 5
+  blur_prob: 0.15
+  noise_prob: 0.15
+  brightness: 0.2
+  contrast: [0.8, 1.2]

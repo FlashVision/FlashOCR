@@ -1,0 +1,44 @@
+# FlashOCR-m-0.5x | Knowledge Distillation
+# Train small student (m-0.5x) from larger teacher (m-1.5x)
+# Usage: flashocr train --config configs/flashocr_m_kd.yaml
+
+model:
+  name: FlashOCR
+  backbone: ShuffleNetV2
+  backbone_size: "0.5x"
+  input_size: [32, 128]
+  charset: "0123456789abcdefghijklmnopqrstuvwxyz"
+  hidden_size: 128
+  num_layers: 2
+  decoder_type: ctc
+
+data:
+  train_images: data/train
+  train_labels: data/train/labels.tsv
+  val_images: data/val
+  val_labels: data/val/labels.tsv
+  num_workers: 8
+
+train:
+  epochs: 200
+  batch_size: 128
+  learning_rate: 0.001
+  weight_decay: 0.05
+  warmup_epochs: 5
+  val_interval: 10
+  save_dir: workspace/flashocr_kd
+
+  # Knowledge Distillation
+  use_kd: true
+  kd_teacher_checkpoint: workspace/flashocr_m15x/best.pth
+  kd_teacher_model_size: "m-1.5x"
+  kd_temperature: 4.0
+  kd_logit_weight: 1.0
+  kd_feature_weight: 0.5
+  kd_hard_loss_weight: 1.0
+
+augment:
+  rotation: 5
+  blur_prob: 0.1
+  noise_prob: 0.1
+  brightness: 0.2
