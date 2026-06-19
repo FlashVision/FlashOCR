@@ -99,7 +99,7 @@ def cmd_check(args):
         model.eval()
         with torch.no_grad():
             dummy = torch.randn(1, 3, 32, 128)
-            output = model(dummy)
+            model(dummy)
         print(f"  {_colored('✓', 'green')} model forward pass (FlashOCR-m, 32x128)")
     except Exception as e:
         print(f"  {_colored('✗', 'red')} model forward pass: {e}")

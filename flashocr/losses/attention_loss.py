@@ -4,7 +4,6 @@ Cross-entropy loss for attention-based OCR decoders.
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 
 class AttentionLoss(nn.Module):

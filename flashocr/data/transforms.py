@@ -5,7 +5,6 @@ Images are resized to a fixed height (default 32 px) with proportional width,
 then right-padded to the target width.
 """
 
-import math
 import random
 from typing import Dict, Tuple
 

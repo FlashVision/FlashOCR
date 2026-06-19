@@ -3,12 +3,11 @@
 import logging
 from typing import Dict, List, Optional, Tuple
 
-import numpy as np
 import torch
 import torch.nn as nn
 
 from flashocr.cfg import get_config
-from flashocr.models import FlashOCR, build_model
+from flashocr.models import FlashOCR
 from flashocr.data import create_dataloader
 
 logger = logging.getLogger(__name__)

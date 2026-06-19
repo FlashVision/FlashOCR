@@ -10,7 +10,7 @@ import numpy as np
 import torch
 
 from flashocr.cfg import get_config
-from flashocr.models import FlashOCR, build_model
+from flashocr.models import FlashOCR
 from flashocr.data.transforms import InferenceTransform
 
 logger = logging.getLogger(__name__)

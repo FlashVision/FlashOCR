@@ -15,4 +15,4 @@ exporter.export(
 )
 
 print("ONNX model exported successfully!")
-print(f"Output: model.onnx")
+print("Output: model.onnx")

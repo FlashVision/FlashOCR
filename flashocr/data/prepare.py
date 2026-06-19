@@ -13,8 +13,6 @@ Supported source formats:
 """
 
 import os
-import re
-import glob
 import logging
 from pathlib import Path
 from typing import Optional

@@ -6,16 +6,15 @@ import math
 import logging
 from typing import Dict, List, Optional, Any
 
-import numpy as np
 import torch
 import torch.nn as nn
 
 from flashocr.cfg import get_config
-from flashocr.models import FlashOCR, build_model
+from flashocr.models import build_model
 from flashocr.models.lora import (
     apply_lora, apply_qlora, merge_lora_weights, get_lora_state_dict,
 )
-from flashocr.data import create_dataloader, verify_dataset
+from flashocr.data import create_dataloader
 
 logger = logging.getLogger(__name__)
 
@@ -363,8 +362,6 @@ class Trainer:
         # torchtune optimizations
         if self.activation_checkpointing:
             try:
-                from flashocr.models.recognizer import FlashOCR as _FlashOCR
-                from torch.utils.checkpoint import checkpoint
                 for module in raw_model.modules():
                     if hasattr(module, "gradient_checkpointing"):
                         module.gradient_checkpointing = True

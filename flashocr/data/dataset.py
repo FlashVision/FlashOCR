@@ -138,7 +138,7 @@ def collate_fn(batch: List[Tuple[torch.Tensor, Dict]]) -> Tuple[torch.Tensor, Di
     lengths = torch.stack([t["label_lengths"] for t in targets])
     texts = [t["texts"] for t in targets]
 
-    max_len = max(l.size(0) for l in labels_list)
+    max_len = max(lab.size(0) for lab in labels_list)
     padded = torch.zeros(len(labels_list), max_len, dtype=torch.long)
     for i, lab in enumerate(labels_list):
         padded[i, : lab.size(0)] = lab

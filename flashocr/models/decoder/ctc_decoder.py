@@ -4,7 +4,7 @@ CTC Decoder for FlashOCR.
 BiLSTM + linear projection decoder for CTC-based text recognition.
 """
 
-from typing import List, Optional
+from typing import List
 
 import torch
 import torch.nn as nn
