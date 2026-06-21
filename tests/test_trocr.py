@@ -82,6 +82,7 @@ def test_trocr_model_info():
 
 def test_trocr_registered():
     from flashocr.registry import DECODERS
+
     assert "TrOCR" in DECODERS
 
 
@@ -128,6 +129,7 @@ def test_multilingual_ctc_decoder():
 
 def test_multilingual_decoder_registered():
     from flashocr.registry import DECODERS
+
     assert "MultilingualCTCDecoder" in DECODERS
 
 
