@@ -7,6 +7,17 @@ from .encoder import CNNEncoder
 # Decoder
 from .decoder import CTCDecoder, AttentionDecoder
 
+# Recognition models
+from .recognition import (
+    TrOCR,
+    MultilingualCTCDecoder,
+    LanguageAdapter,
+    detect_language,
+    detect_languages,
+    build_multilingual_charset,
+    LANGUAGE_CHARSETS,
+)
+
 # Recognizer
 from .recognizer import FlashOCR, build_model
 
@@ -25,6 +36,14 @@ __all__ = [
     # Decoder
     "CTCDecoder",
     "AttentionDecoder",
+    # Recognition models
+    "TrOCR",
+    "MultilingualCTCDecoder",
+    "LanguageAdapter",
+    "detect_language",
+    "detect_languages",
+    "build_multilingual_charset",
+    "LANGUAGE_CHARSETS",
     # Recognizer
     "FlashOCR",
     "build_model",
