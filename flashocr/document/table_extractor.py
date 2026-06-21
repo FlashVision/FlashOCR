@@ -6,7 +6,7 @@ cell extraction, and structure recognition.
 
 import logging
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
+from typing import List, Optional, Tuple
 
 import numpy as np
 import torch
@@ -227,9 +227,9 @@ def _merge_close_lines(
         return []
 
     if axis == "horizontal":
-        lines = sorted(lines, key=lambda l: (l[1], l[0]))
+        lines = sorted(lines, key=lambda ln: (ln[1], ln[0]))
     else:
-        lines = sorted(lines, key=lambda l: (l[0], l[1]))
+        lines = sorted(lines, key=lambda ln: (ln[0], ln[1]))
 
     merged = [lines[0]]
     for line in lines[1:]:
@@ -265,10 +265,10 @@ def _lines_to_cells(
 ) -> List[TableCell]:
     """Create cells from the grid of horizontal and vertical separators."""
     h_positions = sorted(set(
-        [(l[1] + l[3]) // 2 for l in h_lines]
+        [(ln[1] + ln[3]) // 2 for ln in h_lines]
     ))
     v_positions = sorted(set(
-        [(l[0] + l[2]) // 2 for l in v_lines]
+        [(ln[0] + ln[2]) // 2 for ln in v_lines]
     ))
 
     tx1, ty1, tx2, ty2 = table_bbox
@@ -357,8 +357,8 @@ class TableExtractor:
         if len(h_lines) < 2 or len(v_lines) < 2:
             return []
 
-        all_xs = [l[0] for l in h_lines + v_lines] + [l[2] for l in h_lines + v_lines]
-        all_ys = [l[1] for l in h_lines + v_lines] + [l[3] for l in h_lines + v_lines]
+        all_xs = [ln[0] for ln in h_lines + v_lines] + [ln[2] for ln in h_lines + v_lines]
+        all_ys = [ln[1] for ln in h_lines + v_lines] + [ln[3] for ln in h_lines + v_lines]
         table_bbox = (min(all_xs), min(all_ys), max(all_xs), max(all_ys))
 
         cells = _lines_to_cells(h_lines, v_lines, table_bbox)

@@ -24,7 +24,6 @@ try:
     from transformers import (
         TrOCRProcessor,
         VisionEncoderDecoderModel,
-        VisionEncoderDecoderConfig,
     )
     _HF_AVAILABLE = True
 except ImportError:

@@ -1,7 +1,6 @@
 """Tests for TrOCR and multilingual components."""
 
 import torch
-import numpy as np
 
 CHARSET = "0123456789abcdefghijklmnopqrstuvwxyz"
 

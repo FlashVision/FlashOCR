@@ -87,7 +87,7 @@ def test_layout_analyzer():
 
 
 def test_pdf_processor_init():
-    from flashocr.document.pdf_processor import PDFProcessor, PDFDocument, PDFPage
+    from flashocr.document.pdf_processor import PDFDocument, PDFPage
 
     page = PDFPage(page_number=1, text="Hello World")
     assert page.text == "Hello World"
